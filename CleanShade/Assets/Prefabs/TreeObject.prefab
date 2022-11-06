@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2522159203926031173}
   - component: {fileID: 2522159203926031179}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: SpirteHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5f26e6e5a7e9046858f4d5cc971002dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea89760b66d65bf44aa8b1310e720982, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
