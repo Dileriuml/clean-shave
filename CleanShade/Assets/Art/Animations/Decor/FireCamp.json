@@ -1,0 +1,79 @@
+{
+"skeleton": {
+	"hash": "O6MSdZz9c40",
+	"spine": "4.1.17",
+	"x": -51.5,
+	"y": -79.03,
+	"width": 103,
+	"height": 294,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "fire", "parent": "root", "x": -2, "y": 8.12, "color": "ff0000ff" }
+],
+"slots": [
+	{ "name": "firecamp_seq/firecamp_fire0001", "bone": "fire", "attachment": "firecamp_seq/firecamp_fire0001" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"firecamp_seq/firecamp_fire0001": {
+				"firecamp_seq/firecamp_fire0001": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0002": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0003": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0004": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0005": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0006": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0007": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0008": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0009": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0010": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0011": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0012": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0013": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0014": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0015": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0016": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0017": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0018": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0019": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0020": { "x": 2, "y": 59.85, "width": 103, "height": 294 },
+				"firecamp_seq/firecamp_fire0021": { "x": 2, "y": 59.85, "width": 103, "height": 294 }
+			}
+		}
+	}
+],
+"animations": {
+	"idle": {
+		"slots": {
+			"firecamp_seq/firecamp_fire0001": {
+				"attachment": [
+					{ "time": 0.0333, "name": "firecamp_seq/firecamp_fire0002" },
+					{ "time": 0.0667, "name": "firecamp_seq/firecamp_fire0003" },
+					{ "time": 0.1, "name": "firecamp_seq/firecamp_fire0004" },
+					{ "time": 0.1333, "name": "firecamp_seq/firecamp_fire0005" },
+					{ "time": 0.1667, "name": "firecamp_seq/firecamp_fire0006" },
+					{ "time": 0.2, "name": "firecamp_seq/firecamp_fire0007" },
+					{ "time": 0.2333, "name": "firecamp_seq/firecamp_fire0008" },
+					{ "time": 0.2667, "name": "firecamp_seq/firecamp_fire0009" },
+					{ "time": 0.3, "name": "firecamp_seq/firecamp_fire0010" },
+					{ "time": 0.3333, "name": "firecamp_seq/firecamp_fire0011" },
+					{ "time": 0.3667, "name": "firecamp_seq/firecamp_fire0012" },
+					{ "time": 0.4, "name": "firecamp_seq/firecamp_fire0013" },
+					{ "time": 0.4333, "name": "firecamp_seq/firecamp_fire0014" },
+					{ "time": 0.4667, "name": "firecamp_seq/firecamp_fire0015" },
+					{ "time": 0.5, "name": "firecamp_seq/firecamp_fire0016" },
+					{ "time": 0.5333, "name": "firecamp_seq/firecamp_fire0017" },
+					{ "time": 0.5667, "name": "firecamp_seq/firecamp_fire0018" },
+					{ "time": 0.6, "name": "firecamp_seq/firecamp_fire0019" },
+					{ "time": 0.6333, "name": "firecamp_seq/firecamp_fire0020" },
+					{ "time": 0.6667, "name": "firecamp_seq/firecamp_fire0021" }
+				]
+			}
+		}
+	}
+}
+}
