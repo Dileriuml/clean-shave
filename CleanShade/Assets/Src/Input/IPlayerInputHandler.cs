@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Src.Characters
+namespace Src.Input
 {
-    public interface IPlayerInput
+    public interface IPlayerInputHandler
     {
         Vector2 GetMoveVector();
     }
