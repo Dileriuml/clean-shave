@@ -1,5 +1,7 @@
 using Spine.Unity;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Src.Characters.Player
 {
@@ -24,7 +26,9 @@ namespace Src.Characters.Player
         public SkeletonAnimation SpineSkeletonAnimation { get; }
 
         public float Health => health;
-        
+
+        public Vector3 AimVector { get; set; }
+
         public Quaternion Rotation
         {
             get => RigidBody.rotation;

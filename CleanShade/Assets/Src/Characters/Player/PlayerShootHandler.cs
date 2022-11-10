@@ -1,36 +1,36 @@
 using System;
 using Src.Audio;
-using Src.Characters.Player;
+using Src.Characters.Shooting;
 using Src.Input;
 using UnityEngine;
 using Zenject;
 
-namespace Src.Characters
+namespace Src.Characters.Player
 {
     public class PlayerShootHandler : ITickable
     {
-        private readonly AudioPlayer audioPlayer;
-        private readonly PlayerModel playerModel;
+        private readonly IAudioPlayer audioPlayer;
         private readonly PlayerState playerState;
         private readonly Settings settings;
-        //readonly Bullet.Factory _bulletFactory;
+        private readonly PlayerModel playerModel;
+        private readonly Bullet.Factory bulletFactory;
         private readonly IPlayerInputState inputState;
 
-        float lastFireTime;
+        private float lastFireTime;
 
         public PlayerShootHandler(
             IPlayerInputState inputState,
-          //  Bullet.Factory bulletFactory,
+            Bullet.Factory bulletFactory,
             Settings settings,
             PlayerModel playerModel,
             PlayerState playerState,
-            AudioPlayer audioPlayer)
+            IAudioPlayer audioPlayer)
         {
             this.audioPlayer = audioPlayer;
             this.playerState = playerState;
             this.playerModel = playerModel;
             this.settings = settings;
-            //_bulletFactory = bulletFactory;
+            this.bulletFactory = bulletFactory;
             this.inputState = inputState;
         }
 
@@ -41,22 +41,28 @@ namespace Src.Characters
                 return;
             }
 
-            if (inputState.IsFiring && Time.realtimeSinceStartup - lastFireTime > settings.MaxShootInterval)
+            if (inputState.IsFiring && 
+                Time.realtimeSinceStartup - lastFireTime > settings.MaxShootInterval)
             {
                 lastFireTime = Time.realtimeSinceStartup;
                 Fire();
             }
         }
 
-        void Fire()
+        private void Fire()
         {
-            audioPlayer.Play(settings.Laser, settings.LaserVolume);
+            if (settings.Laser != null)
+            {
+                audioPlayer.Play(settings.Laser, settings.LaserVolume);
+            }
 
-            // var bullet = _bulletFactory.Create(
-            //     _settings.BulletSpeed, _settings.BulletLifetime, BulletTypes.FromPlayer);
-            //
-            // bullet.transform.position = _player.Position + _player.LookDir * _settings.BulletOffsetDistance;
-            // bullet.transform.rotation = _player.Rotation;
+            var bullet = bulletFactory.Create(
+                settings.BulletSpeed,
+                settings.BulletLifetime, 
+                BulletOwnerType.FromPlayer);
+            
+            bullet.transform.position = playerModel.Position + playerModel.AimVector * settings.BulletOffsetDistance;
+            bullet.transform.rotation = playerModel.Rotation;
         }
 
         [Serializable]

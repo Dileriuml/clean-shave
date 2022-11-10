@@ -1,4 +1,3 @@
-using System;
 using Src.Input;
 using UnityEngine;
 using Zenject;
@@ -35,9 +34,6 @@ namespace Src.Characters.Player
             var moveVector = RotatedVector * inputState.MoveVector;
             var calculatedMoveVector = moveVector.normalized * (settings.Speed * Time.deltaTime);
             player.RigidBody.position += calculatedMoveVector;
-
-            // Always ensure we are on the main plane
-            //player.Position = new Vector3(player.Position.x, player.Position.y, 0);
         }
     }
 }
