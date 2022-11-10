@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Characters:
     playerSettings:
-      speed: 5
+      speed: 3
     enemySettings:
       speed: 4
   Camera:
-    Offset: {x: 5, y: 0, z: 5}
-    Smoothing: 5
+    Offset: {x: -9, y: 8.5, z: -9}
+    Smoothing: 2

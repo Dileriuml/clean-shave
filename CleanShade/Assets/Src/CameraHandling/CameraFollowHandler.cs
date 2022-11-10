@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Src.CameraHandling
 {
-    public class CameraFollowHandler : ILateTickable
+    public class CameraFollowHandler : IFixedTickable
     {
         private readonly Camera mainCamera;
         private readonly CameraSettings cameraSettings;
@@ -19,8 +19,8 @@ namespace Src.CameraHandling
             this.cameraSettings = cameraSettings;
             this.playerModel = playerModel;
         }
-        
-        public void LateTick()
+
+        public void FixedTick()
         {
             mainCamera.transform.position = Vector3.Lerp(
                 mainCamera.transform.position, 

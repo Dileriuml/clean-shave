@@ -32,7 +32,8 @@ namespace Src.Characters.Player
                 return;
             }
 
-            var calculatedMoveVector = (RotatedVector * inputState.MoveVector) * (settings.Speed * Time.deltaTime);
+            var moveVector = RotatedVector * inputState.MoveVector;
+            var calculatedMoveVector = moveVector.normalized * (settings.Speed * Time.deltaTime);
             player.RigidBody.position += calculatedMoveVector;
 
             // Always ensure we are on the main plane
