@@ -17,3 +17,6 @@ MonoBehaviour:
       speed: 5
     enemySettings:
       speed: 4
+  Camera:
+    Offset: {x: 5, y: 0, z: 5}
+    Smoothing: 5

@@ -1,4 +1,5 @@
 using System;
+using Src.CameraHandling;
 using Src.Characters;
 using Src.Characters.Player;
 using Src.Input;
@@ -20,6 +21,7 @@ namespace Src.Utility.Container.Installers
                      .WithArguments(settings.MeshRenderer, settings.Rigidbody);
 
             Container.BindInterfacesTo<PlayerInputState>().AsSingle();
+            Container.BindInterfacesTo<CameraFollowHandler>().AsSingle();
             Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
             Container.BindInterfacesTo<PlayerMoveHandler>().AsSingle();
             //Container.BindInterfacesAndSelfTo<PlayerDamageHandler>().AsSingle();
