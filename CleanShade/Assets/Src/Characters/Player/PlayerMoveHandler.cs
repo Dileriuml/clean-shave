@@ -10,21 +10,24 @@ namespace Src.Characters.Player
         private static readonly Quaternion RotatedVector = Quaternion.AngleAxis( 45f, Vector3.up);
         private readonly CharactersSettings.Player settings;
         private readonly PlayerModel player;
+        private readonly PlayerState playerState;
         private readonly IPlayerInputState inputState;
 
         public PlayerMoveHandler(
             IPlayerInputState inputState,
             PlayerModel player,
+            PlayerState playerState,
             CharactersSettings.Player settings)
         {
             this.settings = settings;
             this.player = player;
+            this.playerState = playerState;
             this.inputState = inputState;
         }
 
         public void FixedTick()
         {
-            if (player.IsDead)
+            if (playerState.IsDead)
             {
                 return;
             }
