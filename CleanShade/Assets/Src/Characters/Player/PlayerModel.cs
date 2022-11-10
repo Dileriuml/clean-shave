@@ -1,3 +1,4 @@
+using Spine.Unity;
 using UnityEngine;
 
 namespace Src.Characters.Player
@@ -6,20 +7,24 @@ namespace Src.Characters.Player
     {
         private float health = 100.0f;
 
-        public PlayerModel(MeshRenderer renderer, Rigidbody rigidBody)
+        public PlayerModel(
+            MeshRenderer renderer, 
+            Rigidbody rigidBody, 
+            SkeletonAnimation spineSkeletonAnimation)
         {
             RigidBody = rigidBody;
             Renderer = renderer;
+            SpineSkeletonAnimation = spineSkeletonAnimation;
         }
 
         public MeshRenderer Renderer { get; }
 
         public Rigidbody RigidBody { get; }
 
-        public bool IsDead { get; set; }
+        public SkeletonAnimation SpineSkeletonAnimation { get; }
 
         public float Health => health;
-
+        
         public Quaternion Rotation
         {
             get => RigidBody.rotation;

@@ -6,16 +6,18 @@ namespace Src.Characters.Player
     public class PlayerFacade : MonoBehaviour
     {
         private PlayerModel model;
+        private PlayerState playerState;
         //PlayerDamageHandler _hitHandler;
 
         [Inject]
-        public void Construct(PlayerModel model)//, PlayerDamageHandler hitHandler)
+        public void Construct(PlayerModel model, PlayerState playerState)//, PlayerDamageHandler hitHandler)
         {
             this.model = model;
+            this.playerState = playerState;
             //_hitHandler = hitHandler;
         }
 
-        public bool IsDead => model.IsDead;
+        public bool IsDead => playerState.IsDead;
 
         public Vector3 Position => model.Position;
 
