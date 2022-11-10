@@ -9,11 +9,12 @@ namespace Src.Characters
 {
     public class PlayerShootHandler : ITickable
     {
-        readonly AudioPlayer audioPlayer;
-        readonly PlayerModel player;
-        readonly Settings settings;
+        private readonly AudioPlayer audioPlayer;
+        private readonly PlayerModel playerModel;
+        private readonly PlayerState playerState;
+        private readonly Settings settings;
         //readonly Bullet.Factory _bulletFactory;
-        readonly IPlayerInputState inputState;
+        private readonly IPlayerInputState inputState;
 
         float lastFireTime;
 
@@ -21,11 +22,13 @@ namespace Src.Characters
             IPlayerInputState inputState,
           //  Bullet.Factory bulletFactory,
             Settings settings,
-            PlayerModel player,
+            PlayerModel playerModel,
+            PlayerState playerState,
             AudioPlayer audioPlayer)
         {
             this.audioPlayer = audioPlayer;
-            this.player = player;
+            this.playerState = playerState;
+            this.playerModel = playerModel;
             this.settings = settings;
             //_bulletFactory = bulletFactory;
             this.inputState = inputState;
@@ -33,7 +36,7 @@ namespace Src.Characters
 
         public void Tick()
         {
-            if (player.IsDead)
+            if (playerState.IsDead)
             {
                 return;
             }
