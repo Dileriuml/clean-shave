@@ -32,7 +32,7 @@ namespace Src.Characters.Player
             }
 
             var moveVector = RotatedVector * inputState.MoveVector;
-            var calculatedMoveVector = moveVector.normalized * (settings.Speed * Time.deltaTime);
+            var calculatedMoveVector = moveVector.normalized * (settings.MoveSpeed * Time.deltaTime);
             player.RigidBody.position += calculatedMoveVector;
         }
     }

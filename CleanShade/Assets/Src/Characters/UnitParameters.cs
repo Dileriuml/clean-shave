@@ -7,8 +7,13 @@ namespace Src.Characters
     public class UnitParameters
     {
         [SerializeField]
-        private float speed;
+        private float moveSpeed;
 
-        public float Speed => speed;
+        [SerializeField] 
+        private float moveAnimtionScale;
+        
+        public float MoveSpeed => moveSpeed;
+
+        public float MoveAnimtionScale => moveSpeed;
     }
 }

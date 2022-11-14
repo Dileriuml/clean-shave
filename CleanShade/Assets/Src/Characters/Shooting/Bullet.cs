@@ -22,7 +22,7 @@ namespace Src.Characters.Shooting
 
         private IMemoryPool pool;
 
-        public Vector3 MoveDirection => transform.right;
+        public Vector3 MoveDirection => transform.forward;
 
         public void OnTriggerEnter(Collider other)
         {
@@ -46,11 +46,12 @@ namespace Src.Characters.Shooting
 
         public void Update()
         {
-            transform.position -= transform.right * speed * Time.deltaTime;
+            var moveChange = MoveDirection * speed * Time.deltaTime;
+            transform.position += moveChange;
 
             if (Time.realtimeSinceStartup - startTime > lifeTime)
             {
-                pool.Despawn(this);
+                pool?.Despawn(this);
             }
         }
 

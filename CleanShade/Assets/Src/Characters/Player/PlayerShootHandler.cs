@@ -40,6 +40,8 @@ namespace Src.Characters.Player
             {
                 return;
             }
+            
+            playerState.IsFiring = inputState.IsFiring;
 
             if (inputState.IsFiring && 
                 Time.realtimeSinceStartup - lastFireTime > settings.MaxShootInterval)
@@ -51,9 +53,9 @@ namespace Src.Characters.Player
 
         private void Fire()
         {
-            if (settings.Laser != null)
+            if (settings.ShootingSound != null)
             {
-                audioPlayer.Play(settings.Laser, settings.LaserVolume);
+                audioPlayer.Play(settings.ShootingSound, settings.LaserVolume);
             }
 
             var bullet = bulletFactory.Create(
@@ -62,13 +64,13 @@ namespace Src.Characters.Player
                 BulletOwnerType.FromPlayer);
             
             bullet.transform.position = playerModel.Position + playerModel.AimVector * settings.BulletOffsetDistance;
-            bullet.transform.rotation = playerModel.Rotation;
+            bullet.transform.LookAt(playerModel.AimVector);
         }
 
         [Serializable]
         public class Settings
         {
-            public AudioClip Laser;
+            public AudioClip ShootingSound;
             public float LaserVolume = 1.0f;
 
             public float BulletLifetime;

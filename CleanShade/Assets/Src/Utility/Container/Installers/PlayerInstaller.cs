@@ -15,16 +15,17 @@ namespace Src.Utility.Container.Installers
         [SerializeField]
         private Settings settings = null;
 
+        [SerializeField] 
+        private MouseRaycastSettings mouseRaycastSettings = null;
+
         public override void InstallBindings()
         {
-            Container.Bind<CharactersSettings>().AsSingle();
             Container.Bind<PlayerModel>().AsSingle()
                      .WithArguments(
                          settings.MeshRenderer, 
                          settings.Rigidbody, 
                          settings.SpineAnimator);
 
-            Container.Bind<PlayerInputActions>().AsSingle();
             Container.BindInterfacesTo<PlayerInputState>().AsSingle();
             Container.BindInterfacesTo<AudioPlayer>().AsSingle();
             
@@ -32,11 +33,14 @@ namespace Src.Utility.Container.Installers
             Container.BindInterfacesTo<PlayerMoveHandler>().AsSingle();
             Container.BindInterfacesTo<PlayerShootHandler>().AsSingle();
             Container.BindInterfacesTo<PlayerAimHandler>().AsSingle();
-            
             Container.BindInterfacesTo<CameraFollowHandler>().AsSingle();
+            
             Container.BindInterfacesAndSelfTo<PlayerAnimationHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerStateProvider>().AsSingle();
             
+            Container.BindInstance<IMouseRaycastSettings>(mouseRaycastSettings);
+            
+            Container.Bind<PlayerInputActions>().AsSingle();
             Container.Bind<PlayerState>().AsSingle();
             //Container.BindInterfacesAndSelfTo<PlayerDamageHandler>().AsSingle();
             //Container.BindInterfacesTo<PlayerDirectionHandler>().AsSingle();

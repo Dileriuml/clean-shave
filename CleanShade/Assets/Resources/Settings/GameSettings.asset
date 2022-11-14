@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Characters:
     playerSettings:
-      speed: 3
+      moveSpeed: 3
+      moveAnimtionScale: 1
     enemySettings:
-      speed: 4
+      moveSpeed: 3
+      moveAnimtionScale: 1
   Camera:
     Offset: {x: -9, y: 8.5, z: -9}
     Smoothing: 2
@@ -24,9 +26,9 @@ MonoBehaviour:
     BulletPrefab: {fileID: 8842558607437036946, guid: 6db8f83cecd57486ebb8f33639f3189a,
       type: 3}
   PlayerShootSettings:
-    Laser: {fileID: 0}
+    ShootingSound: {fileID: 0}
     LaserVolume: 1
-    BulletLifetime: 4
+    BulletLifetime: 10
     BulletSpeed: 10
-    MaxShootInterval: 0.4
+    MaxShootInterval: 0.9
     BulletOffsetDistance: 0

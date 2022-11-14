@@ -1,20 +1,25 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Src.Input
 {
-    public class PlayerInputHandler : ITickable
+    public class PlayerInputHandler : ITickable, IFixedTickable
     {
         private readonly IPlayerInputState playerInputState;
+        private readonly IMouseRaycastSettings _mouseRaycastSettings;
+        
         private readonly PlayerInputActions playerInputActions;
         private readonly Camera mainCamera;
         
         public PlayerInputHandler(
-            Camera mainCamera,
             IPlayerInputState playerInputState,
+            IMouseRaycastSettings mouseRaycastSettings,
+            Camera mainCamera,
             PlayerInputActions playerInputActions)
         {
             this.mainCamera = mainCamera;
+            this._mouseRaycastSettings = mouseRaycastSettings;
             this.playerInputState = playerInputState;
             this.playerInputActions = playerInputActions;
             playerInputActions.Player.Enable();
@@ -26,9 +31,10 @@ namespace Src.Input
         {
             HandlerMovementInput();
             HandleFireInput();
-            HandleCursorInput();
         }
 
+        public void FixedTick() => HandleCursorInput();
+        
         private void HandleFireInput()
         {
             playerInputState.IsFiring = playerInputActions.Player.Fire.IsPressed();
@@ -42,8 +48,19 @@ namespace Src.Input
 
         private void HandleCursorInput()
         {
-            var mousePos = playerInputActions.Player.MousePosition.ReadValue<Vector2>();
-            playerInputState.AimLocation = mainCamera.ScreenPointToRay(mousePos).origin;
+            var positionValue = Mouse.current.position.ReadValue();
+            var mouseRayFromCamera = mainCamera.ScreenPointToRay(positionValue);
+
+            if (Physics.Raycast(
+                    mouseRayFromCamera, 
+                    out var rayHitPosition, 
+                    100f, 
+                    _mouseRaycastSettings.AimRaycastingMask))
+            {
+                var point = rayHitPosition.point;
+                point.y = 0f;
+                playerInputState.AimLocation = point;
+            }
         }
     }
 }

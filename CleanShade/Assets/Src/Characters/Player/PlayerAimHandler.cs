@@ -1,5 +1,4 @@
 using Src.Input;
-using UnityEngine;
 using Zenject;
 
 namespace Src.Characters.Player
@@ -19,8 +18,9 @@ namespace Src.Characters.Player
         
         public void FixedTick()
         {
-            Debug.Log($"{playerInputState.AimLocation.x} {playerInputState.AimLocation.y} {playerInputState.AimLocation.z}");
-            playerModel.AimVector = (playerModel.Position - playerInputState.AimLocation).normalized;
+            var aimLocation = playerInputState.AimLocation;
+            aimLocation.y = playerModel.Position.y;
+            playerModel.AimVector = aimLocation;
         }
     }
 }
