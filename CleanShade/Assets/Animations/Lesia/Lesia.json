@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "p4O6JqqVVb0",
+	"hash": "E4LLNOZyyJY",
 	"spine": "4.1.17",
 	"x": -50.34,
 	"y": -2.51,
@@ -132,7 +132,7 @@
 		"color": "ff0000ff"
 	},
 	{ "name": "leg1_target", "parent": "root", "x": -7.5, "y": 1.06, "color": "ff3f00ff" },
-	{ "name": "leg2_ефкпуе", "parent": "root", "x": 15, "y": 1.06, "color": "ff3f00ff" },
+	{ "name": "leg2_target", "parent": "root", "x": 15, "y": 1.06, "color": "ff3f00ff" },
 	{ "name": "arbalet_target", "parent": "root", "x": 36.59, "y": 56.7, "color": "ff3f00ff" }
 ],
 "slots": [
@@ -169,7 +169,7 @@
 		"name": "leg2",
 		"order": 1,
 		"bones": [ "leg2", "leg22" ],
-		"target": "leg2_ефкпуе",
+		"target": "leg2_target",
 		"bendPositive": false
 	}
 ],
@@ -1123,7 +1123,7 @@
 					{ "time": 0.4667 }
 				]
 			},
-			"leg2_ефкпуе": {
+			"leg2_target": {
 				"translate": [
 					{ "x": 17.04 },
 					{ "time": 0.1, "x": -4.35, "y": 1.44 },
