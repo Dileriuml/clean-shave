@@ -74,6 +74,8 @@ namespace Src.Characters.Player
                 return;
             }
 
+            ArrowFiringAnimationTrack.Loop = false;
+            ArrowFiringAnimationTrack.Reverse = true;
             Debug.Log($"There is track removing loop");
         }
         
@@ -82,6 +84,7 @@ namespace Src.Characters.Player
             if (ArrowFiringAnimationTrack is {} fat)
             {
                 Debug.Log($"Track resumed");
+                fat.Reverse = false;
                 fat.Loop = true;
                 return;
             }

@@ -7,7 +7,7 @@ namespace Src.Input
     public class PlayerInputHandler : ITickable, IFixedTickable
     {
         private readonly IPlayerInputState playerInputState;
-        private readonly IMouseRaycastSettings _mouseRaycastSettings;
+        private readonly IMouseRaycastSettings mouseRaycastSettings;
         
         private readonly PlayerInputActions playerInputActions;
         private readonly Camera mainCamera;
@@ -19,7 +19,7 @@ namespace Src.Input
             PlayerInputActions playerInputActions)
         {
             this.mainCamera = mainCamera;
-            this._mouseRaycastSettings = mouseRaycastSettings;
+            this.mouseRaycastSettings = mouseRaycastSettings;
             this.playerInputState = playerInputState;
             this.playerInputActions = playerInputActions;
             playerInputActions.Player.Enable();
@@ -55,7 +55,7 @@ namespace Src.Input
                     mouseRayFromCamera, 
                     out var rayHitPosition, 
                     100f, 
-                    _mouseRaycastSettings.AimRaycastingMask))
+                    mouseRaycastSettings.AimRaycastingMask))
             {
                 var point = rayHitPosition.point;
                 point.y = 0f;

@@ -62,7 +62,7 @@ namespace Src.Characters.Shooting
             this.speed = speed;
             this.lifeTime = lifeTime;
 
-            renderer.material = type == BulletOwnerType.FromEnemy ? enemyMaterial : playerMaterial;
+            //renderer.material = type == BulletOwnerType.FromEnemy ? enemyMaterial : playerMaterial;
 
             startTime = Time.realtimeSinceStartup;
         }

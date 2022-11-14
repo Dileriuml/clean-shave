@@ -24,7 +24,8 @@ namespace Src.Utility.Container.Installers
                      .WithArguments(
                          settings.MeshRenderer, 
                          settings.Rigidbody, 
-                         settings.SpineAnimator);
+                         settings.SpineAnimator,
+                         settings.AimTranform);
 
             Container.BindInterfacesTo<PlayerInputState>().AsSingle();
             Container.BindInterfacesTo<AudioPlayer>().AsSingle();
@@ -54,6 +55,7 @@ namespace Src.Utility.Container.Installers
             public Rigidbody Rigidbody;
             public MeshRenderer MeshRenderer;
             public SkeletonAnimation SpineAnimator;
+            public Transform AimTranform;
         }
     }
 }

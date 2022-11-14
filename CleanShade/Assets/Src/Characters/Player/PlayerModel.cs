@@ -17,11 +17,13 @@ namespace Src.Characters.Player
         public PlayerModel(
             MeshRenderer renderer, 
             Rigidbody rigidBody, 
-            SkeletonAnimation spineSkeletonAnimation)
+            SkeletonAnimation spineSkeletonAnimation,
+            Transform aimTransform)
         {
             RigidBody = rigidBody;
             Renderer = renderer;
             SpineSkeletonAnimation = spineSkeletonAnimation;
+            AimTransform = aimTransform;
         }
 
         public MeshRenderer Renderer { get; }
@@ -29,6 +31,8 @@ namespace Src.Characters.Player
         public Rigidbody RigidBody { get; }
 
         public SkeletonAnimation SpineSkeletonAnimation { get; }
+
+        public Transform AimTransform { get; }
 
         public float Health => health;
 
