@@ -5,12 +5,18 @@ namespace Src.Characters.Player
 {
     public class PlayerFacade : MonoBehaviour
     {
+        [SerializeField]
         private PlayerModel model;
+        
+        [SerializeField]
         private PlayerState playerState;
+        
         //PlayerDamageHandler _hitHandler;
 
         [Inject]
-        public void Construct(PlayerModel model, PlayerState playerState)//, PlayerDamageHandler hitHandler)
+        public void Construct(
+            PlayerModel model, 
+            PlayerState playerState)//, PlayerDamageHandler hitHandler)
         {
             this.model = model;
             this.playerState = playerState;

@@ -1,20 +1,29 @@
+using System;
 using Spine.Unity;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Src.Characters.Player
 {
+    [Serializable]
     public class PlayerModel
     {
         private float health = 100.0f;
 
+        [SerializeField]
+        private Vector3 aimVector;
+        
         public PlayerModel(
             MeshRenderer renderer, 
             Rigidbody rigidBody, 
-            SkeletonAnimation spineSkeletonAnimation)
+            SkeletonAnimation spineSkeletonAnimation,
+            Transform aimTransform)
         {
             RigidBody = rigidBody;
             Renderer = renderer;
             SpineSkeletonAnimation = spineSkeletonAnimation;
+            AimTransform = aimTransform;
         }
 
         public MeshRenderer Renderer { get; }
@@ -23,8 +32,16 @@ namespace Src.Characters.Player
 
         public SkeletonAnimation SpineSkeletonAnimation { get; }
 
+        public Transform AimTransform { get; }
+
         public float Health => health;
-        
+
+        public Vector3 AimVector
+        {
+            get => aimVector;
+            set => aimVector = value;
+        }
+
         public Quaternion Rotation
         {
             get => RigidBody.rotation;

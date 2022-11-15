@@ -1,4 +1,3 @@
-using System;
 using Src.Input;
 using UnityEngine;
 using Zenject;
@@ -7,7 +6,6 @@ namespace Src.Characters.Player
 {
     public class PlayerMoveHandler : IFixedTickable
     {
-        private static readonly Quaternion RotatedVector = Quaternion.AngleAxis( 45f, Vector3.up);
         private readonly CharactersSettings.Player settings;
         private readonly PlayerModel player;
         private readonly PlayerState playerState;
@@ -32,12 +30,9 @@ namespace Src.Characters.Player
                 return;
             }
 
-            var moveVector = RotatedVector * inputState.MoveVector;
-            var calculatedMoveVector = moveVector.normalized * (settings.Speed * Time.deltaTime);
+            var moveVector = inputState.MoveVector;
+            var calculatedMoveVector = moveVector.normalized * (settings.MoveSpeed * Time.deltaTime);
             player.RigidBody.position += calculatedMoveVector;
-
-            // Always ensure we are on the main plane
-            //player.Position = new Vector3(player.Position.x, player.Position.y, 0);
         }
     }
 }

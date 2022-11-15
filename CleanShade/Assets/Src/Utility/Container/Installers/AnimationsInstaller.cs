@@ -1,24 +1,35 @@
 using System;
 using Spine.Unity;
+using Src.Characters.Anim;
 using Zenject;
 
 namespace Src.Utility.Container.Installers
 {
     public class AnimationsInstaller : ScriptableObjectInstaller<AnimationsInstaller>
     {
-        public PlayerAnimations PlayerStates;
+        public PlayerAnimations PlayerAnimationConfig;
+        public EnemyAnimations EnemyAnimationConfig;
 
         public override void InstallBindings()
         {
-            Container.BindInstance(PlayerStates).IfNotBound();
+            Container.BindInstance(PlayerAnimationConfig).IfNotBound();
+            Container.BindInstance(EnemyAnimationConfig).IfNotBound();
         }
 
         [Serializable]
         public class PlayerAnimations
         {
-            public AnimationReferenceAsset Idle;
-            public AnimationReferenceAsset Move;
-            public AnimationReferenceAsset Fire;
+            public AnimationStateConfig Idle;
+            public AnimationStateConfig Move;
+            public AnimationStateConfig Fire;
+        }
+        
+        [Serializable]
+        public class EnemyAnimations
+        {
+            public AnimationStateConfig Idle;
+            public AnimationStateConfig Move;
+            public AnimationStateConfig Fire;
         }
     }
 }
