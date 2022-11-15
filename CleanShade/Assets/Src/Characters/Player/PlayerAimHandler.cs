@@ -1,11 +1,13 @@
 using Src.Input;
-using UnityEngine;
 using Zenject;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Src.Characters.Player
 {
     public class PlayerAimHandler : IFixedTickable
     {
+        private const float AimSpeed = 200f;
         private readonly PlayerModel playerModel;
         private readonly IPlayerInputState playerInputState;
         
@@ -28,12 +30,27 @@ namespace Src.Characters.Player
 
         private void HandleAimBowTransform(Vector3 aimLocation)
         {
-            var aimTranformVector = aimLocation - playerModel.Position;
+            if (!playerInputState.IsFiring)
+            {
+                LerpTargetAimTo(Vector3.zero);
+                return;
+            }
+
+            var rotatedAim = Quaternion.AngleAxis(30f, Vector3.right) * aimLocation;
+            var aimTranformVector = rotatedAim - playerModel.Position;
             aimTranformVector.y = aimTranformVector.z;
             aimTranformVector.z = 0f;
 
-            playerModel.AimTransform.position = aimTranformVector;
-            playerModel.SpineSkeletonAnimation.Skeleton.ScaleX = aimTranformVector.x >= 0 ? 1 : -1;
+            var invertedAimVector = new Vector3(-aimTranformVector.x, aimTranformVector.y);
+            var targetVector = aimTranformVector.x >= 0 ? aimTranformVector : invertedAimVector;
+            LerpTargetAimTo(targetVector);
+             
+            playerModel.SpineSkeletonAnimation.Skeleton.ScaleX = aimTranformVector.x >= 0 ? -1 : 1;
+        }
+
+        private void LerpTargetAimTo(Vector3 targetVector)
+        {
+            playerModel.AimTransform.localPosition = Vector3.Lerp(playerModel.AimTransform.localPosition, targetVector, AimSpeed);
         }
     }
 }

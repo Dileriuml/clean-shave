@@ -65,6 +65,7 @@ namespace Src.Characters.Shooting
             //renderer.material = type == BulletOwnerType.FromEnemy ? enemyMaterial : playerMaterial;
 
             startTime = Time.realtimeSinceStartup;
+            transform.LookAt(Camera.main.transform);
         }
 
         public void OnDespawned()

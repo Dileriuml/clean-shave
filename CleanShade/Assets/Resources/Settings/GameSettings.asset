@@ -20,7 +20,7 @@ MonoBehaviour:
       moveSpeed: 3
       moveAnimtionScale: 1
   Camera:
-    Offset: {x: -9, y: 8.5, z: -9}
+    Offset: {x: 0, y: 4, z: -6}
     Smoothing: 2
   Prefabs:
     BulletPrefab: {fileID: 8842558607437036946, guid: 6db8f83cecd57486ebb8f33639f3189a,
