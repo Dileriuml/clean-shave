@@ -23,12 +23,15 @@ MonoBehaviour:
     Offset: {x: 0, y: 4, z: -6}
     Smoothing: 2
   Prefabs:
-    BulletPrefab: {fileID: 8842558607437036946, guid: 6db8f83cecd57486ebb8f33639f3189a,
+    BulletPrefab: {fileID: 3486671629298708436, guid: 6db8f83cecd57486ebb8f33639f3189a,
       type: 3}
   PlayerShootSettings:
     ShootingSound: {fileID: 0}
     LaserVolume: 1
     BulletLifetime: 10
-    BulletSpeed: 10
+    BulletSpeed: 1
     MaxShootInterval: 0.9
-    BulletOffsetDistance: 0
+    BulletOffsetDistance: 0.1
+    ShotHeight: 0.8
+  PlayerAimSettings:
+    AimSpeedScale: 0.1

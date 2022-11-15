@@ -14,12 +14,14 @@ namespace Src.Utility.Container.Installers
         public CameraSettings Camera;
         public PrefabSettings Prefabs;
         public PlayerShootHandler.Settings PlayerShootSettings;
+        public PlayerAimHandler.Settings PlayerAimSettings;
         
         public override void InstallBindings()
         {
             Container.BindInstance(Characters.PlayerSettings).IfNotBound();
             Container.BindInstance(Characters.EnemySettings).IfNotBound();
             Container.BindInstance(PlayerShootSettings).IfNotBound();
+            Container.BindInstance(PlayerAimSettings).IfNotBound();
             Container.BindInstance(Camera).IfNotBound();
             
             RegisterFactories();

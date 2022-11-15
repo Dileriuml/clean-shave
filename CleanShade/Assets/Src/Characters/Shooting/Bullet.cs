@@ -12,16 +12,12 @@ namespace Src.Characters.Shooting
         private BulletOwnerType ownerType;
 
         [SerializeField]
-        private MeshRenderer renderer = null;
-
-        [SerializeField]
-        private Material playerMaterial = null;
-
-        [SerializeField]
-        private Material enemyMaterial = null;
+        private Transform childTransform;
 
         private IMemoryPool pool;
 
+        public Transform ChildTransform => childTransform;
+        
         public Vector3 MoveDirection => transform.forward;
 
         public void OnTriggerEnter(Collider other)
@@ -65,7 +61,6 @@ namespace Src.Characters.Shooting
             //renderer.material = type == BulletOwnerType.FromEnemy ? enemyMaterial : playerMaterial;
 
             startTime = Time.realtimeSinceStartup;
-            transform.LookAt(Camera.main.transform);
         }
 
         public void OnDespawned()

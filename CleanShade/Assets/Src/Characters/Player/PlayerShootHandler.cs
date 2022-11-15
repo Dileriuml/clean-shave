@@ -15,6 +15,7 @@ namespace Src.Characters.Player
         private readonly PlayerModel playerModel;
         private readonly Bullet.Factory bulletFactory;
         private readonly IPlayerInputState inputState;
+        private readonly Camera camera;
 
         private float lastFireTime;
 
@@ -24,7 +25,8 @@ namespace Src.Characters.Player
             Settings settings,
             PlayerModel playerModel,
             PlayerState playerState,
-            IAudioPlayer audioPlayer)
+            IAudioPlayer audioPlayer,
+            Camera camera)
         {
             this.audioPlayer = audioPlayer;
             this.playerState = playerState;
@@ -32,6 +34,7 @@ namespace Src.Characters.Player
             this.settings = settings;
             this.bulletFactory = bulletFactory;
             this.inputState = inputState;
+            this.camera = camera;
         }
 
         public void Tick()
@@ -62,9 +65,18 @@ namespace Src.Characters.Player
                 settings.BulletSpeed,
                 settings.BulletLifetime, 
                 BulletOwnerType.FromPlayer);
+
+            var aimVectorLocalized = playerModel.AimVector - playerModel.Position;
+
+            var elevatedAim = playerModel.AimVector;
+            elevatedAim.y = settings.ShotHeight;
+            var elevatedPosition = playerModel.Position + aimVectorLocalized.normalized * settings.BulletOffsetDistance;
+            elevatedPosition.y = settings.ShotHeight;
             
-            bullet.transform.position = playerModel.Position + playerModel.AimVector * settings.BulletOffsetDistance;
-            bullet.transform.LookAt(playerModel.AimVector);
+            bullet.transform.position = elevatedPosition;
+            bullet.transform.LookAt(elevatedAim);
+            bullet.ChildTransform.LookAt(camera.transform);
+            bullet.ChildTransform.Rotate(Vector3.forward, bullet.transform.eulerAngles.y + settings.AdditionalIzometricRotation);
         }
 
         [Serializable]
@@ -77,6 +89,8 @@ namespace Src.Characters.Player
             public float BulletSpeed;
             public float MaxShootInterval;
             public float BulletOffsetDistance;
+            public float ShotHeight;
+            public float AdditionalIzometricRotation = 90f;
         }
     }
 }

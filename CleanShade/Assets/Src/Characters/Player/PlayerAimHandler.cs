@@ -1,3 +1,4 @@
+using System;
 using Src.Input;
 using Zenject;
 using Quaternion = UnityEngine.Quaternion;
@@ -7,14 +8,16 @@ namespace Src.Characters.Player
 {
     public class PlayerAimHandler : IFixedTickable
     {
-        private const float AimSpeed = 200f;
+        private readonly Settings aimSettings;
         private readonly PlayerModel playerModel;
         private readonly IPlayerInputState playerInputState;
         
         public PlayerAimHandler(
             IPlayerInputState playerInputState,
-            PlayerModel playerModel)
+            PlayerModel playerModel,
+            Settings aimSettings)
         {
+            this.aimSettings = aimSettings;
             this.playerInputState = playerInputState;
             this.playerModel = playerModel;
         }
@@ -44,13 +47,22 @@ namespace Src.Characters.Player
             var invertedAimVector = new Vector3(-aimTranformVector.x, aimTranformVector.y);
             var targetVector = aimTranformVector.x >= 0 ? aimTranformVector : invertedAimVector;
             LerpTargetAimTo(targetVector);
-             
+            
             playerModel.SpineSkeletonAnimation.Skeleton.ScaleX = aimTranformVector.x >= 0 ? -1 : 1;
         }
 
         private void LerpTargetAimTo(Vector3 targetVector)
         {
-            playerModel.AimTransform.localPosition = Vector3.Lerp(playerModel.AimTransform.localPosition, targetVector, AimSpeed);
+            playerModel.AimTransform.localPosition = Vector3.Lerp(
+                playerModel.AimTransform.localPosition, 
+                targetVector, 
+                aimSettings.AimSpeedScale);
+        }
+        
+        [Serializable]
+        public class Settings
+        {
+            public float AimSpeedScale = 0.1f;
         }
     }
 }
