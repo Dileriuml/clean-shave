@@ -16,7 +16,7 @@ MonoBehaviour:
     playerSettings:
       moveSpeed: 3
       moveAnimtionScale: 1
-      FireRate: 1
+      FireRate: 5
     enemySettings:
       moveSpeed: 3
       moveAnimtionScale: 1
