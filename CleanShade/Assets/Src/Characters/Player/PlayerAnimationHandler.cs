@@ -1,7 +1,6 @@
 using Spine;
 using Spine.Unity;
 using Src.Utility.Container.Installers;
-using UnityEngine;
 using Zenject;
 
 namespace Src.Characters.Player
@@ -11,9 +10,10 @@ namespace Src.Characters.Player
         private const int MoveAnimationTrackId = 0;
         private const int FireAnimationTrackId = 1;
         
+        private readonly CharactersSettings.Player playerSettings;
         private readonly AnimationsInstaller.PlayerAnimations playerAnimations;
         private readonly PlayerState playerState;
-        private readonly SkeletonAnimation animation;
+        private readonly SkeletonAnimation skeletonBody;
         
         private bool isFireAnimationPlaying;
         private AnimationReferenceAsset currentAnimation;
@@ -21,11 +21,13 @@ namespace Src.Characters.Player
         public PlayerAnimationHandler(
             PlayerState playerState, 
             PlayerModel playerModel, 
+            CharactersSettings.Player playerSettings,
             AnimationsInstaller.PlayerAnimations playerAnimations)
         {
             this.playerState = playerState;
-            this.animation = playerModel.SpineSkeletonAnimation;
+            this.skeletonBody = playerModel.SpineSkeletonAnimation;
             this.playerAnimations = playerAnimations;
+            this.playerSettings = playerSettings;
         }
         
         public void Tick()
@@ -33,8 +35,10 @@ namespace Src.Characters.Player
             HandleMoveAnimation();
             HandleFireAnimation();
         }
+
+        private float FireTimeScal => playerAnimations.Fire.DefaultTimeScale * playerSettings.FireRate;
         
-        private TrackEntry ArrowFiringAnimationTrack => animation.state.GetCurrent(FireAnimationTrackId);
+        private TrackEntry ArrowFiringAnimationTrack => skeletonBody.state.GetCurrent(FireAnimationTrackId);
 
         private void HandleMoveAnimation()
         {
@@ -52,6 +56,8 @@ namespace Src.Characters.Player
             {
                 CancelFireAnimation();
             }
+
+            SetFireAnimationScale();
         }
 
         private void SetAnimation(AnimationReferenceAsset animation, bool loop, float timeScale)
@@ -63,34 +69,39 @@ namespace Src.Characters.Player
 
             currentAnimation = animation;
             
-            this.animation.state.SetAnimation(MoveAnimationTrackId, animation, loop).TimeScale = timeScale;
+            this.skeletonBody.state.SetAnimation(MoveAnimationTrackId, animation, loop).TimeScale = timeScale;
         }
         
         private void CancelFireAnimation()
         {
             if (ArrowFiringAnimationTrack == null)
             {
-                Debug.Log($"No anim track to cancel");
                 return;
             }
 
             ArrowFiringAnimationTrack.Loop = false;
-            ArrowFiringAnimationTrack.Reverse = true;
-            Debug.Log($"There is track removing loop");
+            
         }
         
         private void SetFireAnimation()
         {
             if (ArrowFiringAnimationTrack is {} fat)
             {
-                Debug.Log($"Track resumed");
-                fat.Reverse = false;
                 fat.Loop = true;
                 return;
             }
             
-            Debug.Log($"No track - setting track");
-            animation.state.SetAnimation(FireAnimationTrackId, playerAnimations.Fire.Asset, true).TimeScale = playerAnimations.Fire.DefaultTimeScale;
+            skeletonBody.state.SetAnimation(FireAnimationTrackId, playerAnimations.Fire.Asset, true);
+        }
+        
+        private void SetFireAnimationScale()
+        {
+            if (ArrowFiringAnimationTrack == null)
+            {
+                return;
+            }
+
+            ArrowFiringAnimationTrack.TimeScale = FireTimeScal;
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using Src.Input;
 using Zenject;
-using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Src.Characters.Player
@@ -24,11 +23,9 @@ namespace Src.Characters.Player
         
         public void FixedTick()
         {
-            var aimLocation = playerInputState.AimLocation;
-            aimLocation.y = playerModel.Position.y;
-            playerModel.AimVector = aimLocation;
+            playerModel.AimVector = playerInputState.AimLocation;
 
-            HandleAimBowTransform(aimLocation);
+            HandleAimBowTransform(playerInputState.AimLocation);
         }
 
         private void HandleAimBowTransform(Vector3 aimLocation)
@@ -38,12 +35,11 @@ namespace Src.Characters.Player
                 LerpTargetAimTo(Vector3.zero);
                 return;
             }
-
-            var rotatedAim = Quaternion.AngleAxis(30f, Vector3.right) * aimLocation;
-            var aimTranformVector = rotatedAim - playerModel.Position;
+    
+            var aimTranformVector = aimLocation - playerModel.Position;
             aimTranformVector.y = aimTranformVector.z;
             aimTranformVector.z = 0f;
-
+            
             var invertedAimVector = new Vector3(-aimTranformVector.x, aimTranformVector.y);
             var targetVector = aimTranformVector.x >= 0 ? aimTranformVector : invertedAimVector;
             LerpTargetAimTo(targetVector);

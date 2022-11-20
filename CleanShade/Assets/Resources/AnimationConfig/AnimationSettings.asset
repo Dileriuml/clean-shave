@@ -21,7 +21,7 @@ MonoBehaviour:
       DefaultTimeScale: 1
     Fire:
       Asset: {fileID: 11400000, guid: 1460cef92b70b4459900072852f15335, type: 2}
-      DefaultTimeScale: 0.8
+      DefaultTimeScale: 1
   EnemyAnimationConfig:
     Idle:
       Asset: {fileID: 0}

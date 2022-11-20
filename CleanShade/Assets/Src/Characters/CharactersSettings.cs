@@ -18,7 +18,8 @@ namespace Src.Characters
 
         [Serializable]
         public class Player : UnitParameters
-        {   
+        {
+            public float FireRate = 1;
         }
 
         [Serializable]

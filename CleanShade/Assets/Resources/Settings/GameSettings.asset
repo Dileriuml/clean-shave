@@ -16,6 +16,7 @@ MonoBehaviour:
     playerSettings:
       moveSpeed: 3
       moveAnimtionScale: 1
+      FireRate: 1
     enemySettings:
       moveSpeed: 3
       moveAnimtionScale: 1
@@ -28,10 +29,11 @@ MonoBehaviour:
   PlayerShootSettings:
     ShootingSound: {fileID: 0}
     LaserVolume: 1
-    BulletLifetime: 10
-    BulletSpeed: 1
-    MaxShootInterval: 0.9
-    BulletOffsetDistance: 0.1
-    ShotHeight: 0.8
+    BulletLifetime: 7
+    BulletSpeed: 12
+    MaxShootInterval: 0.66
+    BulletOffsetDistance: 0.2
+    ShotHeight: 0.49
+    AdditionalIzometricRotation: 90
   PlayerAimSettings:
     AimSpeedScale: 0.1

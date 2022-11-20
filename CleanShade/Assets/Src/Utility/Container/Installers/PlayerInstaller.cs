@@ -2,7 +2,6 @@ using System;
 using Spine.Unity;
 using Src.Audio;
 using Src.CameraHandling;
-using Src.Characters;
 using Src.Characters.Player;
 using Src.Input;
 using UnityEngine;

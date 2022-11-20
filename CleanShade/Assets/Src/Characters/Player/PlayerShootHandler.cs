@@ -10,6 +10,7 @@ namespace Src.Characters.Player
     public class PlayerShootHandler : ITickable
     {
         private readonly IAudioPlayer audioPlayer;
+        private readonly CharactersSettings.Player playerSettings;
         private readonly PlayerState playerState;
         private readonly Settings settings;
         private readonly PlayerModel playerModel;
@@ -23,6 +24,7 @@ namespace Src.Characters.Player
             IPlayerInputState inputState,
             Bullet.Factory bulletFactory,
             Settings settings,
+            CharactersSettings.Player playerSettings,
             PlayerModel playerModel,
             PlayerState playerState,
             IAudioPlayer audioPlayer,
@@ -32,6 +34,7 @@ namespace Src.Characters.Player
             this.playerState = playerState;
             this.playerModel = playerModel;
             this.settings = settings;
+            this.playerSettings = playerSettings;
             this.bulletFactory = bulletFactory;
             this.inputState = inputState;
             this.camera = camera;
@@ -47,7 +50,7 @@ namespace Src.Characters.Player
             playerState.IsFiring = inputState.IsFiring;
 
             if (inputState.IsFiring && 
-                Time.realtimeSinceStartup - lastFireTime > settings.MaxShootInterval)
+                Time.realtimeSinceStartup - lastFireTime > settings.MaxShootInterval / Math.Max(playerSettings.FireRate, float.Epsilon))
             {
                 lastFireTime = Time.realtimeSinceStartup;
                 Fire();
@@ -68,14 +71,13 @@ namespace Src.Characters.Player
 
             var aimVectorLocalized = playerModel.AimVector - playerModel.Position;
 
-            var elevatedAim = playerModel.AimVector;
-            elevatedAim.y = settings.ShotHeight;
-            var elevatedPosition = playerModel.Position + aimVectorLocalized.normalized * settings.BulletOffsetDistance;
-            elevatedPosition.y = settings.ShotHeight;
-            
-            bullet.transform.position = elevatedPosition;
-            bullet.transform.LookAt(elevatedAim);
+            bullet.transform.position = playerModel.Position + aimVectorLocalized.normalized * settings.BulletOffsetDistance;
+            bullet.transform.LookAt(playerModel.AimVector);
             bullet.ChildTransform.LookAt(camera.transform);
+
+            var childPosition = bullet.ChildTransform.localPosition;
+            childPosition.y = settings.ShotHeight;
+            bullet.ChildTransform.localPosition = childPosition;
             bullet.ChildTransform.Rotate(Vector3.forward, bullet.transform.eulerAngles.y + settings.AdditionalIzometricRotation);
         }
 
