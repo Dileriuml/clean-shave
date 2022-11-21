@@ -1,41 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7409819310891953082
+--- !u!1001 &8217835573356100049
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1571496393430165937, guid: b7988cd5f953e4dc7997a3a0470bd868,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3716a8516c337aa4fa949a0e16de1b78,
+        type: 3}
+    - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.621663
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.621663
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.621663
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.21
+      objectReference: {fileID: 0}
     - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9659258
+      value: 0.9648925
       objectReference: {fileID: 0}
     - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.2588191
+      value: 0.2585422
       objectReference: {fileID: 0}
     - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.011968422
       objectReference: {fileID: 0}
     - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.044666745
       objectReference: {fileID: 0}
     - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 5.301
       objectReference: {fileID: 0}
     - target: {fileID: 2522159204074529016, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
@@ -45,17 +76,17 @@ PrefabInstance:
     - target: {fileID: 2522159204074529016, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.146
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522159204074529016, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.077
+      value: 0.79
       objectReference: {fileID: 0}
     - target: {fileID: 2522159204074529016, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.608
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522159204074529016, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
@@ -95,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 2522159204074529022, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_Name
-      value: TreeObject Variant
+      value: Ruin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7988cd5f953e4dc7997a3a0470bd868, type: 3}
