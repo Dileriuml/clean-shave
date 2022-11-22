@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.134
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2522159203926031173, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
@@ -46,12 +46,12 @@ PrefabInstance:
     - target: {fileID: 2522159204074529016, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.82
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522159204074529016, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522159204074529016, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
@@ -96,7 +96,7 @@ PrefabInstance:
     - target: {fileID: 2522159204074529022, guid: b7988cd5f953e4dc7997a3a0470bd868,
         type: 3}
       propertyPath: m_Name
-      value: SpriteObject
+      value: Bush2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7988cd5f953e4dc7997a3a0470bd868, type: 3}
