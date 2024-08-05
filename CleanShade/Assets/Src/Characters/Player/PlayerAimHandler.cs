@@ -43,8 +43,12 @@ namespace Src.Characters.Player
             var invertedAimVector = new Vector3(-aimTranformVector.x, aimTranformVector.y);
             var targetVector = aimTranformVector.x >= 0 ? aimTranformVector : invertedAimVector;
             LerpTargetAimTo(targetVector);
-            
-            playerModel.SpineSkeletonAnimation.Skeleton.ScaleX = aimTranformVector.x >= 0 ? -1 : 1;
+
+            if (!aimTranformVector.x.IsAlmostZero())
+            {
+                playerModel.SpineSkeletonAnimation.Skeleton.ScaleX =
+                    aimTranformVector.x >= 0 ? -1 : 1;
+            }
         }
 
         private void LerpTargetAimTo(Vector3 targetVector)

@@ -1,3 +1,4 @@
+using Src.Characters.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -11,25 +12,26 @@ namespace Src.Input
         
         private readonly PlayerInputActions playerInputActions;
         private readonly Camera mainCamera;
-        
+        private readonly Transform playerSpriteTransform;
+
         public PlayerInputHandler(
             IPlayerInputState playerInputState,
             IMouseRaycastSettings mouseRaycastSettings,
             Camera mainCamera,
+            PlayerModel playerModel,
             PlayerInputActions playerInputActions)
         {
             this.mainCamera = mainCamera;
             this.mouseRaycastSettings = mouseRaycastSettings;
             this.playerInputState = playerInputState;
             this.playerInputActions = playerInputActions;
+            this.playerSpriteTransform = playerModel.Renderer.transform;
             playerInputActions.Player.Enable();
         }
         
-        public Vector2 GetMoveVector() => playerInputActions.Player.Movement.ReadValue<Vector2>();
-        
         public void Tick()
         {
-            HandlerMovementInput();
+            HandleMovementInput();
             HandleFireInput();
         }
 
@@ -40,7 +42,9 @@ namespace Src.Input
             playerInputState.IsFiring = playerInputActions.Player.Fire.IsPressed();
         }
 
-        private void HandlerMovementInput()
+        private Vector2 GetMoveVector() => playerInputActions.Player.Movement.ReadValue<Vector2>();
+
+        private void HandleMovementInput()
         {
             var moveVector = GetMoveVector();
             playerInputState.MoveVector = new Vector3(moveVector.x, 0, moveVector.y);

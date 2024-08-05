@@ -12,28 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ffdaecb5124939840f18ef54925fbc, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  Characters:
-    playerSettings:
-      moveSpeed: 3
-      moveAnimtionScale: 1
-      FireRate: 5
-    enemySettings:
-      moveSpeed: 3
-      moveAnimtionScale: 1
   Camera:
     Offset: {x: 0, y: 4, z: -6}
     Smoothing: 2
+  Characters:
+    playerSettings:
+      moveSpeed: 4
+      moveAnimtionScale: 1
+      FireRate: 1
+    enemySettings:
+      moveSpeed: 3
+      moveAnimtionScale: 1
+  IsometricScalingSettings:
+    IsometricScalingFactor: 1.5
   Prefabs:
     BulletPrefab: {fileID: 3486671629298708436, guid: 6db8f83cecd57486ebb8f33639f3189a,
       type: 3}
   PlayerShootSettings:
     ShootingSound: {fileID: 0}
-    LaserVolume: 1
+    LaserVolume: 0.7
     BulletLifetime: 7
-    BulletSpeed: 12
+    BulletSpeed: 0.1
     MaxShootInterval: 0.66
-    BulletOffsetDistance: 0.2
-    ShotHeight: 0.49
+    BulletOffsetDistance: 0.58
+    ShotHeight: 0.52
     AdditionalIzometricRotation: 90
   PlayerAimSettings:
     AimSpeedScale: 0.1

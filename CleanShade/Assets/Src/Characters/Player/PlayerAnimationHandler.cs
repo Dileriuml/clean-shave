@@ -14,7 +14,7 @@ namespace Src.Characters.Player
         private readonly AnimationsInstaller.PlayerAnimations playerAnimations;
         private readonly PlayerState playerState;
         private readonly SkeletonAnimation skeletonBody;
-        
+
         private bool isFireAnimationPlaying;
         private AnimationReferenceAsset currentAnimation;
         
@@ -80,7 +80,6 @@ namespace Src.Characters.Player
             }
 
             ArrowFiringAnimationTrack.Loop = false;
-            
         }
         
         private void SetFireAnimation()

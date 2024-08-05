@@ -17,6 +17,7 @@ namespace Src.Characters.Player
         private readonly Bullet.Factory bulletFactory;
         private readonly IPlayerInputState inputState;
         private readonly Camera camera;
+        private readonly IsometricScalingSettings isometricScalingSettings;
 
         private float lastFireTime;
 
@@ -28,7 +29,8 @@ namespace Src.Characters.Player
             PlayerModel playerModel,
             PlayerState playerState,
             IAudioPlayer audioPlayer,
-            Camera camera)
+            Camera camera,
+            IsometricScalingSettings isometricScalingSettings)
         {
             this.audioPlayer = audioPlayer;
             this.playerState = playerState;
@@ -38,6 +40,7 @@ namespace Src.Characters.Player
             this.bulletFactory = bulletFactory;
             this.inputState = inputState;
             this.camera = camera;
+            this.isometricScalingSettings = isometricScalingSettings;
         }
 
         public void Tick()
@@ -67,6 +70,7 @@ namespace Src.Characters.Player
             var bullet = bulletFactory.Create(
                 settings.BulletSpeed,
                 settings.BulletLifetime, 
+                isometricScalingSettings,
                 BulletOwnerType.FromPlayer);
 
             var aimVectorLocalized = playerModel.AimVector - playerModel.Position;

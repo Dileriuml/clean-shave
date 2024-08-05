@@ -10,8 +10,9 @@ namespace Src.Utility.Container.Installers
 {
     public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
     {
-        public CharactersSettings Characters;
         public CameraSettings Camera;
+        public CharactersSettings Characters;
+        public IsometricScalingSettings IsometricScalingSettings;
         public PrefabSettings Prefabs;
         public PlayerShootHandler.Settings PlayerShootSettings;
         public PlayerAimHandler.Settings PlayerAimSettings;
@@ -23,14 +24,15 @@ namespace Src.Utility.Container.Installers
             Container.BindInstance(PlayerShootSettings).IfNotBound();
             Container.BindInstance(PlayerAimSettings).IfNotBound();
             Container.BindInstance(Camera).IfNotBound();
+            Container.BindInstance(IsometricScalingSettings).IfNotBound();
             
             RegisterFactories();
         }
 
         private void RegisterFactories()
         {
-            Container.BindFactory<float, float, BulletOwnerType, Bullet, Bullet.Factory>()
-                .FromPoolableMemoryPool<float, float, BulletOwnerType, Bullet, BulletPool>(poolBinder => poolBinder
+            Container.BindFactory<float, float, IsometricScalingSettings, BulletOwnerType, Bullet, Bullet.Factory>()
+                .FromPoolableMemoryPool<float, float, IsometricScalingSettings, BulletOwnerType, Bullet, BulletPool>(poolBinder => poolBinder
                     .WithInitialSize(20)
                     .FromComponentInNewPrefab(Prefabs.BulletPrefab)
                     .UnderTransformGroup("Bullets"));
@@ -42,7 +44,7 @@ namespace Src.Utility.Container.Installers
             public GameObject BulletPrefab;
         }
         
-        public class BulletPool : MonoPoolableMemoryPool<float, float, BulletOwnerType, IMemoryPool, Bullet>
+        public class BulletPool : MonoPoolableMemoryPool<float, float, IsometricScalingSettings, BulletOwnerType, IMemoryPool, Bullet>
         {
         }
     }

@@ -4,9 +4,9 @@ using Zenject;
 
 namespace Src.Characters.Shooting
 {
-    public class Bullet : MonoBehaviour, IPoolable<float, float, BulletOwnerType, IMemoryPool>
+    public class Bullet : MonoBehaviour, IPoolable<float, float, IsometricScalingSettings, BulletOwnerType, IMemoryPool>
     {
-        private float startTime;
+        private float spawnedTime;
         private float speed;
         private float lifeTime;
         private BulletOwnerType ownerType;
@@ -15,6 +15,8 @@ namespace Src.Characters.Shooting
         private Transform childTransform;
 
         private IMemoryPool pool;
+        private float isometricScaleModificator;
+        private IsometricScalingSettings isometricScalingSettings;
 
         public Transform ChildTransform => childTransform;
         
@@ -43,16 +45,17 @@ namespace Src.Characters.Shooting
         public void Update()
         {
             var moveChange = MoveDirection * speed * Time.deltaTime;
-            transform.position += moveChange;
+            transform.position += moveChange.ApplyIsometricScale(isometricScalingSettings.IsometricScalingFactor);
 
-            if (Time.realtimeSinceStartup - startTime > lifeTime)
+            if (Time.realtimeSinceStartup - spawnedTime > lifeTime)
             {
                 pool?.Despawn(this);
             }
         }
 
-        public void OnSpawned(float speed, float lifeTime, BulletOwnerType type, IMemoryPool pool)
+        public void OnSpawned(float speed, float lifeTime, IsometricScalingSettings isometricScaleSettings, BulletOwnerType type, IMemoryPool pool)
         {
+            isometricScalingSettings = isometricScaleSettings;
             this.pool = pool;
             ownerType = type;
             this.speed = speed;
@@ -60,7 +63,7 @@ namespace Src.Characters.Shooting
 
             //renderer.material = type == BulletOwnerType.FromEnemy ? enemyMaterial : playerMaterial;
 
-            startTime = Time.realtimeSinceStartup;
+            spawnedTime = Time.realtimeSinceStartup;
         }
 
         public void OnDespawned()
@@ -68,7 +71,7 @@ namespace Src.Characters.Shooting
             pool = null;
         }
 
-        public class Factory : PlaceholderFactory<float, float, BulletOwnerType, Bullet>
+        public class Factory : PlaceholderFactory<float, float,IsometricScalingSettings, BulletOwnerType, Bullet>
         {
         }
     }
