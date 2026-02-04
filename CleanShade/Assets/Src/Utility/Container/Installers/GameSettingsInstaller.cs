@@ -22,6 +22,7 @@ namespace Src.Utility.Container.Installers
             Container.BindInstance(Characters.EnemySettings).IfNotBound();
             Container.BindInstance(PlayerShootSettings).IfNotBound();
             Container.BindInstance(PlayerAimSettings).IfNotBound();
+            
             Container.BindInstance(Camera).IfNotBound();
             
             RegisterFactories();

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Src.Characters.Player
 {
-    public class PlayerAnimationHandler : ITickable
+    public class PlayerAnimationHandler : ITickable, IInitializable
     {
         private const int MoveAnimationTrackId = 0;
         private const int FireAnimationTrackId = 1;
@@ -15,7 +15,6 @@ namespace Src.Characters.Player
         private readonly PlayerState playerState;
         private readonly SkeletonAnimation skeletonBody;
         
-        private bool isFireAnimationPlaying;
         private AnimationReferenceAsset currentAnimation;
         
         public PlayerAnimationHandler(
@@ -35,6 +34,11 @@ namespace Src.Characters.Player
             HandleMoveAnimation();
             HandleFireAnimation();
         }
+        
+        public void Initialize()
+        {
+            SetFireAnimation();
+        }
 
         private float FireTimeScal => playerAnimations.Fire.DefaultTimeScale * playerSettings.FireRate;
         
@@ -43,24 +47,27 @@ namespace Src.Characters.Player
         private void HandleMoveAnimation()
         {
             var moveAnimation = playerState.IsMoving ? playerAnimations.Move : playerAnimations.Idle;
-            SetAnimation(moveAnimation.Asset, true, moveAnimation.DefaultTimeScale);
+            SetMoveTrackAnimation(moveAnimation.Asset, true, moveAnimation.DefaultTimeScale);
         }
 
         private void HandleFireAnimation()
         {
-            if (playerState.IsFiring)
+            if (ArrowFiringAnimationTrack is null)
             {
                 SetFireAnimation();
+            }
+
+            if (playerState.IsFiring)
+            {
+                ActivateFireAimAnimation();
             }
             else
             {
                 CancelFireAnimation();
             }
-
-            SetFireAnimationScale();
         }
 
-        private void SetAnimation(AnimationReferenceAsset animation, bool loop, float timeScale)
+        private void SetMoveTrackAnimation(AnimationReferenceAsset animation, bool loop, float timeScale)
         {
             if (currentAnimation == animation)
             {
@@ -68,40 +75,44 @@ namespace Src.Characters.Player
             }
 
             currentAnimation = animation;
-            
-            this.skeletonBody.state.SetAnimation(MoveAnimationTrackId, animation, loop).TimeScale = timeScale;
+            skeletonBody.state.SetAnimation(MoveAnimationTrackId, animation, loop).TimeScale = timeScale;
         }
         
         private void CancelFireAnimation()
         {
-            if (ArrowFiringAnimationTrack == null)
+            if (ArrowFiringAnimationTrack is not { Loop: true })
             {
                 return;
             }
 
+            var currentTime = ArrowFiringAnimationTrack.AnimationTime % ArrowFiringAnimationTrack.Animation.Duration;
             ArrowFiringAnimationTrack.Loop = false;
-            
+            ArrowFiringAnimationTrack.TrackTime = currentTime;
+            SetFireAnimationScale(true);
         }
-        
-        private void SetFireAnimation()
-        {
-            if (ArrowFiringAnimationTrack is {} fat)
-            {
-                fat.Loop = true;
-                return;
-            }
-            
-            skeletonBody.state.SetAnimation(FireAnimationTrackId, playerAnimations.Fire.Asset, true);
-        }
-        
-        private void SetFireAnimationScale()
-        {
-            if (ArrowFiringAnimationTrack == null)
-            {
-                return;
-            }
 
-            ArrowFiringAnimationTrack.TimeScale = FireTimeScal;
+        private void ActivateFireAimAnimation()
+        {
+            if (ArrowFiringAnimationTrack is not { Loop: false })
+            {
+                return;
+            }
+            
+            var currentTime = ArrowFiringAnimationTrack.AnimationTime % ArrowFiringAnimationTrack.Animation.Duration;
+            ArrowFiringAnimationTrack.Loop = true;
+            ArrowFiringAnimationTrack.TrackTime = currentTime;
+            SetFireAnimationScale(false);
+        }
+
+        private void SetFireAnimation(bool withLoop = true)
+        {
+            skeletonBody.state.SetAnimation(FireAnimationTrackId, playerAnimations.Fire.Asset, withLoop);
+            ArrowFiringAnimationTrack.TimeScale = 0;
+        }
+        
+        private void SetFireAnimationScale(bool invert)
+        {
+            ArrowFiringAnimationTrack.TimeScale = (invert ? -1 : 1) * FireTimeScal;
         }
     }
 }

@@ -30,7 +30,7 @@ MonoBehaviour:
     ShootingSound: {fileID: 0}
     LaserVolume: 1
     BulletLifetime: 7
-    BulletSpeed: 12
+    BulletSpeed: 5
     MaxShootInterval: 0.66
     BulletOffsetDistance: 0.2
     ShotHeight: 0.49
